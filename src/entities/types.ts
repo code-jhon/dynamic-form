@@ -5,7 +5,7 @@ export interface Field {
   name: string,
   label?: string,
   placeholder?: string,
-  options?: RadioItems[] | string[] | React.ReactNode[] | readonly string[],
+  options?: string[] | number[],
   validation?: {
     required?: boolean,
     minLength?: number,
@@ -15,17 +15,14 @@ export interface Field {
     pattern?: string | RegExp,
     custom?: string
   },
-  value: string | number | readonly string[] | undefined,
+  value: string | boolean,
   onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void,
   onBlur?: (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void,
   onFocus?: (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void
 }
 
-export type RadioItems = {
-  label: string,
-  value: string
-};
-
 export type FormProps = {
   [key: string]: string | boolean;
 };
+
+export type Data = { [key: string]: string | boolean };
