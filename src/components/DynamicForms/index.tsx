@@ -1,20 +1,23 @@
 import React from 'react';
-import { Field } from '../../entities/types';
+import { Field, Data } from '../../entities/types';
 
 type Props = {
   config: Field[];
+  openModal: () => void;
+  formValues: Data;
+  setFormValues: (formValues: { [key: string]: string }) => void;
 };
 
-const DynamicForm: React.FC<Props> = ({ config }) => {
-  const [formValues, setFormValues] = React.useState<{ [key: string]: string }>({});
+const DynamicForm: React.FC<Props> = ({ config, openModal, formValues, setFormValues }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
+    setFormValues({ ...formValues, [name]: value});
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    openModal();
     console.log(formValues);
   };
 
@@ -23,16 +26,17 @@ const DynamicForm: React.FC<Props> = ({ config }) => {
       {config.map((field, index) => {
         const { type, name, label, placeholder, options } = field;
         return (
-          <div key={index}>
-            <label htmlFor={name}>{label}</label>
+          <div className="mb-4" key={index}>
+            <label className="block text-gray-600" htmlFor={name}>{label}</label>
             {type === 'text' && (
               <input
                 type={type}
                 name={name}
                 id={name}
                 placeholder={placeholder}
-                value={formValues[name] || ''}
+                value={formValues[name] as string}
                 onChange={handleChange}
+                className="mt-1 p-2 w-full border rounded-md"
               />
             )}
             {type === 'email' && (
@@ -41,8 +45,9 @@ const DynamicForm: React.FC<Props> = ({ config }) => {
                 name={name}
                 id={name}
                 placeholder={placeholder}
-                value={formValues[name] || ''}
+                value={formValues[name] as string}
                 onChange={handleChange}
+                className="mt-1 p-2 w-full border rounded-md"
               />
             )}
             {type === 'password' && (
@@ -51,16 +56,17 @@ const DynamicForm: React.FC<Props> = ({ config }) => {
                 name={name}
                 id={name}
                 placeholder={placeholder}
-                value={formValues[name] || ''}
+                value={formValues[name] as string}
                 onChange={handleChange}
+                className="mt-1 p-2 w-full border rounded-md"
               />
             )}
             {type === 'select' && (
               <select
                 name={name}
                 id={name}
-                value={formValues[name] || ''}
                 onChange={handleChange}
+                className="mt-1 p-2 w-full border rounded-md"
               >
                 {options?.map((option) => (
                   <option key={option as string} value={option as string}>
@@ -75,14 +81,15 @@ const DynamicForm: React.FC<Props> = ({ config }) => {
                 name={name}
                 id={name}
                 placeholder={placeholder}
-                value={formValues[name] || ''}
+                value={formValues[name] as boolean ? 'true' : 'false'}
                 onChange={handleChange}
+                className="form-checkbox"
               />
             )}
           </div>
         );
       })}
-      <button type="submit">Submit</button>
+      <button className='bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded' type="submit">Submit</button>
     </form>
   );
 };

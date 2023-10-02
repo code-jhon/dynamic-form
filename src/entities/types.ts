@@ -29,3 +29,5 @@ export type RadioItems = {
 export type FormProps = {
   [key: string]: string | boolean;
 };
+
+export type Data = { [key: string]: string | boolean };
