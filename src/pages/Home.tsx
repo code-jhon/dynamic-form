@@ -6,13 +6,7 @@ import { Field, Data } from '../entities/types';
 
 const Home: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
-  const [formValues, setFormValues] = React.useState<Data>({
-    name: "",
-    email: "",
-    country: "",
-    password: "",
-    subscribe: false
-  });
+  const [formValues, setFormValues] = React.useState<Data>({});
 
   return (
     <div className="max-w-md mx-auto bg-white p-6 rounded-md shadow-md">

@@ -5,20 +5,19 @@ type Props = {
   config: Field[];
   openModal: () => void;
   formValues: Data;
-  setFormValues: (formValues: { [key: string]: string }) => void;
+  setFormValues: (values: Data) => void;
 };
 
 const DynamicForm: React.FC<Props> = ({ config, openModal, formValues, setFormValues }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value});
+    setFormValues({ ...formValues, [name]: value });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     openModal();
-    console.log(formValues);
   };
 
   return (
@@ -32,7 +31,6 @@ const DynamicForm: React.FC<Props> = ({ config, openModal, formValues, setFormVa
               <input
                 type={type}
                 name={name}
-                id={name}
                 placeholder={placeholder}
                 value={formValues[name] as string}
                 onChange={handleChange}
@@ -43,7 +41,6 @@ const DynamicForm: React.FC<Props> = ({ config, openModal, formValues, setFormVa
               <input
                 type={type}
                 name={name}
-                id={name}
                 placeholder={placeholder}
                 value={formValues[name] as string}
                 onChange={handleChange}
@@ -54,7 +51,6 @@ const DynamicForm: React.FC<Props> = ({ config, openModal, formValues, setFormVa
               <input
                 type={type}
                 name={name}
-                id={name}
                 placeholder={placeholder}
                 value={formValues[name] as string}
                 onChange={handleChange}
@@ -64,7 +60,6 @@ const DynamicForm: React.FC<Props> = ({ config, openModal, formValues, setFormVa
             {type === 'select' && (
               <select
                 name={name}
-                id={name}
                 onChange={handleChange}
                 className="mt-1 p-2 w-full border rounded-md"
               >
@@ -79,9 +74,8 @@ const DynamicForm: React.FC<Props> = ({ config, openModal, formValues, setFormVa
               <input
                 type={type}
                 name={name}
-                id={name}
                 placeholder={placeholder}
-                value={formValues[name] as boolean ? 'true' : 'false'}
+                value={formValues[name] ? 'true' : 'false'}
                 onChange={handleChange}
                 className="form-checkbox"
               />
