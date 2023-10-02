@@ -13,7 +13,8 @@ type Field = {
     pattern?: string | RegExp,
     custom?: string
   },
-  value: string,
+  value: string | boolean,
+  isChecked?: boolean,
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void,
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void,
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void
@@ -27,9 +28,9 @@ type RadioItems = {
 export const config: Field[] = [
   {
     type: 'text',
-    name: 'firstName',
-    label: 'First Name',
-    placeholder: 'Enter your first name',
+    name: 'name',
+    label: 'Name',
+    placeholder: 'Enter your name',
     validation: {
       required: true,
       minLength: 2,
@@ -86,6 +87,6 @@ export const config: Field[] = [
       required: false,
       custom: ''
     },
-    value: ''
+    value: false
   }
 ];
