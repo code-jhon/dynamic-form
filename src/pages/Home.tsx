@@ -3,10 +3,11 @@ import DynamicForms from '../components/DynamicForms';
 import ModalValues from '../components/ModalValues';
 import { config } from '../config';
 import { Field, Data } from '../entities/types';
+import { getInitialData } from '../utils/functions';
 
 const Home: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
-  const [formValues, setFormValues] = React.useState<Data>({});
+  const [formValues, setFormValues] = React.useState<Data>(getInitialData(config as Field[]));
 
   return (
     <div className="max-w-md mx-auto bg-white p-6 rounded-md shadow-md">

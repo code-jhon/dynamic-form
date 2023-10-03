@@ -11,9 +11,10 @@ type Props = {
 const DynamicForm: React.FC<Props> = ({ config, openModal, formValues, setFormValues }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    console.log(name, value);
-    setFormValues({ ...formValues, [name]: value });
+    const { name, value, type } = e.target;
+    const newValue: boolean | string = type === "checkbox" ? !!(e.target as HTMLInputElement).checked : value;
+
+    setFormValues({ ...formValues, [name]: newValue });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -27,7 +28,7 @@ const DynamicForm: React.FC<Props> = ({ config, openModal, formValues, setFormVa
         const { type, name, label, placeholder, options } = field;
         return (
           <div className="mb-4" key={index}>
-            <label className="block text-gray-600" htmlFor={name}>{label}</label>
+            <label className="block text-gray-600" htmlFor={name}>{label}{' '} 
             {type === 'text' && (
               <input
                 type={type}
@@ -75,12 +76,12 @@ const DynamicForm: React.FC<Props> = ({ config, openModal, formValues, setFormVa
               <input
                 type={type}
                 name={name}
-                placeholder={placeholder}
-                value={formValues[name] as boolean }
+                checked={formValues[name] as boolean}
                 onChange={handleChange}
                 className="form-checkbox"
               />
             )}
+            </label>
           </div>
         );
       })}
