@@ -13,7 +13,7 @@ const DynamicForm: React.FC<Props> = ({ config, openModal, formValues, setFormVa
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
     const newValue: boolean | string = type === "checkbox" ? !!(e.target as HTMLInputElement).checked : value;
-    
+
     setFormValues({ ...formValues, [name]: newValue });
   };
 
@@ -28,7 +28,7 @@ const DynamicForm: React.FC<Props> = ({ config, openModal, formValues, setFormVa
         const { type, name, label, placeholder, options } = field;
         return (
           <div className="mb-4" key={index}>
-            <label className="block text-gray-600" htmlFor={name}>{label}
+            <label className="block text-gray-600" htmlFor={name}>{label}{' '} 
             {type === 'text' && (
               <input
                 type={type}
