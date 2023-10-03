@@ -33,7 +33,7 @@ const ModalValues = ({ data, onClose }: Props) => {
                   <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-2 rounded ml-2" onClick={() => setIsVisible(!isVisible)}> {isVisible ? 'Hide' : 'Show'}</button>
                 </li>
                 <li>
-                  <span className="font-medium">Subscribe:</span> {data.subscribe || 'No'}
+                  <span className="font-medium">Subscribe:</span> {data.subscribe ? 'Yes' : 'No'}
                 </li>
               </ul>
             </div>
