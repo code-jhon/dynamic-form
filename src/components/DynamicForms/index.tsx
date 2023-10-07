@@ -136,6 +136,7 @@ const DynamicForm: React.FC<Props> = ({ config, openModal, formValues, setFormVa
                 className="form-checkbox"
               />
             )}
+            {errors[name] && <p className="text-red-500 text-xs italic">{errors[name]}</p>}
           </div>
         );
       })}
